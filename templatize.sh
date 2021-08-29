@@ -1,45 +1,14 @@
 # function that displays info on the command
 function invalid_inputs () {
-        echo "format:new <TYPE> <name>"
+        echo "format:template <TYPE> <NAME>"
         echo "TYPE options are:"
         echo "C++"
         echo "Q"
-        echo "name is whatever you want to call the new project"
+        echo "NAME: whatever you want to call the new project"
+        echo "Alternate format: template <TEMPLATE_DIRECTORY> <PROJECT_DIRECTORY> <FLAG> <NAME>"
         # exits the script
         exit 0
 }
-
-# determines what type of project the user wants and makes it
-case $1 in
-
-    help)
-        invalid_inputs
-        ;;
-
-    C++)
-        # setting the string that needs to be changed
-        to_find=template_cpp
-        # project directory
-        working_dir=~/Documents/C++/$2
-        # setting where the template is
-        template_dir=~/Documents/Shell/templatize_dir/template_cpp
-        ;;
-    
-    Q)
-        # setting the string that needs to be changed
-        to_find=template_Q
-        # project directory
-        working_dir=/Documents/Qcode/$2
-        # setting where the template is
-        template_dir=~/Documents/Shell/templatize_dir/template_Q
-        ;;
-
-    *)
-        # if they enter something that is wrong let them know
-        invalid_inputs
-esac
-
-# if the user did not enter a name for the project
 if [ ${#2} -eq 0 ]
 then
     echo ""
@@ -47,10 +16,60 @@ then
     echo ""
     invalid_inputs
     exit
-fi
 
-# setting the string that replaces the one that is found to the name that was passed in
-replacement=$2
+elif [ $# -eq 2 ]
+then
+    # determines what type of project the user wants and makes it
+    case $1 in
+
+        help)
+            invalid_inputs
+            ;;
+
+        C++)
+            # setting the string that needs to be changed
+            to_find=template_cpp
+
+            # project directory
+            working_dir=~/Documents/C++/$2
+
+            # setting where the template is
+            template_dir=~/Documents/Shell/templatize_dir/template_cpp
+            ;;
+        
+        Q)
+            # setting the string that needs to be changed
+            to_find=template_Q
+
+            # project directory
+            working_dir=/Documents/Qcode/$2
+
+            # setting where the template is
+            template_dir=~/Documents/Shell/templatize_dir/template_Q
+            ;;
+
+        *)
+            # if they enter something that is wrong let them know
+            invalid_inputs
+    esac
+
+    # setting the string that replaces the one that is found to the name that was passed in
+    replacement=$2
+
+elif [ $# -eq 4 ]
+then
+    template_dir=$1
+
+    working_dir=$2/$4
+
+    to_find=$3
+
+    replacement=$4
+
+else
+    invalid_inputs
+
+fi
 
 # making the project directory, -p will make everything in path if need be 
 mkdir -p $working_dir
