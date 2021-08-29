@@ -5,7 +5,13 @@ function invalid_inputs () {
         echo "C++"
         echo "Q"
         echo "NAME: whatever you want to call the new project"
+        echo ""
         echo "Alternate format: template <TEMPLATE_DIRECTORY> <PROJECT_DIRECTORY> <FLAG> <NAME>"
+        echo "TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want o use as a template for the project"
+        echo "PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided"
+        echo "where the directories do not exist they will be made no matter their position on the hierachy"
+        ehco "FLAG: this option is the string that you want to replace in project, including directory names, file names, and file contents"
+        echo "NAME: this option is the string that you want to replace flag in the project directory, including directory names, file names, and file contents" 
         # exits the script
         exit 0
 }
