@@ -1,38 +1,37 @@
+echo $#
+pwd
+
 # function that displays info on the command
 function invalid_inputs () {
-        echo "format:template <TYPE> <NAME>"
-        echo "TYPE options are:"
+        echo "format:template TYPE NAME"
+        echo ""
+        echo "CURRENT TYPE OPTIONS ARE:"
         echo "C++"
-        echo "Q"
+        echo "qiskit"
+        echo ""
         echo "NAME: whatever you want to call the new project"
         echo ""
-        echo "Alternate format: template <TEMPLATE_DIRECTORY> <PROJECT_DIRECTORY> <FLAG> <NAME>"
-        echo "TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want o use as a template for the project"
-        echo "PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided"
-        echo "where the directories do not exist they will be made no matter their position on the hierachy"
-        ehco "FLAG: this option is the string that you want to replace in project, including directory names, file names, and file contents"
-        echo "NAME: this option is the string that you want to replace flag in the project directory, including directory names, file names, and file contents" 
+        echo "Alternate format: template TEMPLATE_DIRECTORY PROJECT_DIRECTORY FLAG NAME"
+        echo ""
+        echo "TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want to use as a template for the project." 
+        echo "NOTE: do not add a / at the end of the path please otherwise it will not work as intended"
+        echo ""
+        echo "PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided where the directories do not exist they will be made no matter their position on the hierachy."
+        echo "NOTE: a drectory will be made in this directory with the name of the project."
+        echo "NOTE: do not add a / at the end of the path it will mess things up."
+        echo ""
+        echo "FLAG: this option is the string that you want to replace in project, including in directory names, file names, and file contents"
+        echo ""
+        echo "NAME: this option is the string that represents what you want to call the project it will replace flag in the project directory, including in directory names, file names, and file contents" 
         # exits the script
         exit 0
 }
-if [ ${#2} -eq 0 ]
-then
-    echo ""
-    echo "must enter a name"
-    echo ""
-    invalid_inputs
-    exit
-
-elif [ $# -eq 2 ]
+if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
-
-        help)
-            invalid_inputs
-            ;;
-
-        C++)
+        
+        c++)
             # setting the string that needs to be changed
             to_find=template_cpp
 
@@ -40,10 +39,10 @@ then
             working_dir=~/Documents/C++/$2
 
             # setting where the template is
-            template_dir=~/Documents/Shell/templatize_dir/template_cpp
+            template_dir=`pwd`/template_cpp
             ;;
         
-        Q)
+        qiskit)
             # setting the string that needs to be changed
             to_find=template_Q
 
@@ -51,7 +50,7 @@ then
             working_dir=/Documents/Qcode/$2
 
             # setting where the template is
-            template_dir=~/Documents/Shell/templatize_dir/template_Q
+            template_dir=`pwd`/template_Q
             ;;
 
         *)
@@ -64,17 +63,25 @@ then
 
 elif [ $# -eq 4 ]
 then
+    # assigning the passed in arguments to the variables in a specified order
     template_dir=$1
-
+    # because a directory will be made with the name of the project in the inputted project directory
     working_dir=$2/$4
-
     to_find=$3
-
     replacement=$4
 
 else
     invalid_inputs
 
+fi
+
+if [ debug = debug ]
+then
+    echo "template directory:" $template_dir
+    echo "project directory:" $working_dir
+    echo "flag:" $to_find
+    echo "name:" $replacement
+    exit
 fi
 
 # making the project directory, -p will make everything in path if need be 
