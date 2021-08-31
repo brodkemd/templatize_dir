@@ -36,13 +36,15 @@ This shell script provides the functionality to create new directory by using an
          TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want to use as a template for the project.
          NOTE: do not add a / at the end of the path please otherwise it will not work as intended
 
-         PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided where the                directories do not exist they will be made no matter their position on the hierachy.
+         PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided where the
+         directories do not exist they will be made no matter their position on the hierachy.
          NOTE: a drectory will be made in this directory with the name of the project.
          NOTE: do not add a / at the end of the path it will mess things up.
 
          FLAG: this option is the string that you want to replace in project, including in directory names, file names, and file contents
 
-         NAME: this option is the string that represents what you want to call the project it will replace flag in the project directory, including in directory              names, file names, and file contents 
+         NAME: this option is the string that represents what you want to call the project it will replace flag in the project directory, including in directory 
+         names, file names, and file contents 
 
 
 # To set a new directory as a template:
@@ -68,6 +70,7 @@ This shell script provides the functionality to create new directory by using an
     
 
    Example of a template that I use
+      
       c++)
       # setting the string that needs to be replaced
       to_find=template_cpp
