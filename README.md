@@ -64,8 +64,8 @@ This shell script provides the functionality to create new directory by using an
       Definitions for Above terms:
       TYPE: what you want to call this collection of parameters.
       FLAG: The string that gets replaced in the directory names, file names, and file contents.
-      PROJECT_DIRECTORY: Where you want the directory that is made for the project to be placed. It is follow by /$2 because the second
-                     passed in the script is the name for the project so the /$2 makes the directory with the name of the project.
+      PROJECT_DIRECTORY: Where you want the directory that is made for the project to be placed. It is follow by /$2 because the second passed in the script is the 
+      name for the project so the /$2 makes the directory with the name of the project.
       TEMPLATE_DIRECTORY: Path to the template for project directory
     
 
