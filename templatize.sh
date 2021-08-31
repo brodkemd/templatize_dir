@@ -1,5 +1,6 @@
-echo $#
-pwd
+install_dir=/home/marek/Documents/Shell/templatize_dir
+
+# install_dir holds where this script is and if configured by the config execuable file, DO NOT CHANGE IT
 
 # function that displays info on the command
 function invalid_inputs () {
@@ -26,6 +27,7 @@ function invalid_inputs () {
         # exits the script
         exit 0
 }
+
 if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
@@ -39,7 +41,7 @@ then
             working_dir=~/Documents/C++/$2
 
             # setting where the template is
-            template_dir=`pwd`/template_cpp
+            template_dir=$install_dir/template_cpp
             ;;
         
         qiskit)
@@ -47,10 +49,10 @@ then
             to_find=template_Q
 
             # project directory
-            working_dir=/Documents/Qcode/$2
+            working_dir=~/Documents/Qcode/$2
 
             # setting where the template is
-            template_dir=`pwd`/template_Q
+            template_dir=$install_dir/template_Q
             ;;
 
         *)
@@ -75,6 +77,8 @@ else
 
 fi
 
+# for debugging purposes
+<<com
 if [ debug = debug ]
 then
     echo "template directory:" $template_dir
@@ -83,12 +87,24 @@ then
     echo "name:" $replacement
     exit
 fi
+com
+
+# converting the flag variable called replacement to all lowercase in case the user entered upper case
+# this is so the functions work as intended
+replacement=${replacement,,}
+
+# informing the user
+echo "Making:" $replacement "directory in: " $working_dir
+
 
 # making the project directory, -p will make everything in path if need be 
 mkdir -p $working_dir
 
+# informing the user
+echo "Copying contents of" $template_dir "to" $working_dir
+
 #copying the template there
-cp $template_dir/* $working_dir
+cp -r $template_dir/* $working_dir
 
 # initializing variable
 dirs_temp="initialized"
@@ -122,12 +138,16 @@ temp_var="hello"
 #going to the directory
 cd $working_dir
 
+# informing the user
+echo "Changing the flag to name in all of the files' contents"
+
 # changing all occurences of the string in every file in the directory, there are there to account for case
 # changing it to the name that was passed in
 find ./ -type f | xargs sed -i  's/'"$to_find"'/'"$replacement"'/g'
 find ./ -type f | xargs sed -i  's/'"${to_find^}"'/'"${replacement^}"'/g'
 find ./ -type f | xargs sed -i  's/'"${to_find^^}"'/'"${replacement^^}"'/g'
 
+echo "NOTE: if you get this error \"ls: cannot access '*/': No such file or directory\" just ignore it"
 # counts how many iterations the loop lower in this file will go through
 # used for comparison
 function max_iterations () {
@@ -184,7 +204,7 @@ function check_if_already_exists () {
 
 function exe() {
     # renaming all of the files and directories
-    echo "running the rename function"
+    #echo "running the rename function"
     rename 's/'"$to_find"'/'"$replacement"'/' *
     rename 's/'"${to_find^}"'/'"${replacement^}"'/' *
     rename 's/'"${to_find^^}"'/'"${replacement^^}"'/' *
@@ -194,8 +214,8 @@ function exe() {
 function move_dirs () {
 
     #indicating where this script is
-    echo ""
-    echo "Current location:"`pwd`
+    #echo ""
+    #echo "Current location:"`pwd`
 
     # iteration counter for the for loop
     local counter=0
@@ -227,8 +247,10 @@ function move_dirs () {
         if [ ${#pwd_compare} -lt ${#working_dir} ]
         then 
             # informing the user
-            echo "current directory is higher on the directory tree: exiting"
+            #echo "current directory is higher on the directory tree: exiting"
             
+            echo "Done"
+
             # exits the script
             exit
         fi
@@ -248,7 +270,7 @@ function move_dirs () {
         if [ $check_result -eq 0 ]
         then
             #informing the user
-            echo $pwd_compare "directory has not been investigated yet: moving there now"
+            #echo $pwd_compare "directory has not been investigated yet: moving there now"
 
             #moving into the directory that has not been copied yet
             cd $pwd_compare
@@ -265,7 +287,7 @@ function move_dirs () {
     if [ $counter -eq 0 ]
     then
         #informing the user
-        echo "reached end of branch: copying then moving up one"
+        #echo "reached end of branch: copying then moving up one"
         
         #assigning the a value to the temp variable because it is the most reliable
         temp_var=`pwd`
@@ -287,7 +309,7 @@ function move_dirs () {
     elif [ $max_count -eq $counter ] && [ $move_on -eq 1 ]
     then
         # informing the user
-        echo "exhausted all branches in this directory: moving up one now"
+        #echo "exhausted all branches in this directory: moving up one now"
 
         #assigning the a value to the temp variable because it is the most reliable
         temp_var=`pwd`
@@ -314,7 +336,7 @@ function move_dirs () {
         move_on=1
 
         # informing the user
-        echo "reached end of branch: copying then moving up one"
+        #echo "reached end of branch: copying then moving up one"
         
         #assigning the a value to the temp variable because it is the most reliable
         temp_var=`pwd`
@@ -343,16 +365,18 @@ function move_dirs () {
     #else
     
     # informing the user
-    echo "running self again"
+    #echo "running self again"
 
     # adding space so the recursions are easy to follow
-    echo " "
+    #echo " "
 
     # recursion call
     move_dirs
     
     #fi
 }
+
+echo "Replacing flag in all file and directory names"
 
 # calling the main funtion 
 move_dirs
