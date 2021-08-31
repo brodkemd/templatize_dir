@@ -33,6 +33,8 @@ then
     # determines what type of project the user wants and makes it
     case $1 in
         
+        # please keep the space directly above this comment there at all times, it will mess things up if you do not have a space there
+        # ADD YOUR CASES BELOW THIS COMMENT
         c++)
             # setting the string that needs to be changed
             to_find=template_cpp
