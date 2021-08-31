@@ -1,4 +1,4 @@
-install_dir=/home/marek/Documents/Shell/templatize_dir
+install_dir=/home/linuxuser/Documents/shell/templatize_dir
 
 # install_dir holds where this script is and if configured by the config execuable file, DO NOT CHANGE IT
 

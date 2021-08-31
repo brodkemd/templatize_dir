@@ -8,6 +8,9 @@ int main() {
 
     // figuring out where the script is installed
     std::string output = run_command_and_get_output("pwd");
+
+    // deletes the newline character
+    output.pop_back();
     
     // copying the lines of the main shell script to into a vector
     copy_lines_of_file_to_vector(contents, "templatize.sh");
@@ -20,7 +23,7 @@ int main() {
 
     // running a command that adds makes the .bash_aliases file and adds the required command to utilize the functionaliy
     // of the main shell script
-    run_command("touch ~/.bash_aliases; echo \"alias template=\'bash ~/Documents/Shell/templatize_dir/templatize.sh\'\" >> ~/.bash_aliases");
+    run_command("touch ~/.bash_aliases; echo \"alias template=\'bash " + output + "/templatize.sh\'\" >> ~/.bash_aliases");
 
     return 0;
 }
