@@ -1,4 +1,4 @@
-install_dir=/home/linuxuser/Documents/shell/templatize_dir
+install_dir=/home/marek/Documents/Shell/templatize_dir
 
 # install_dir holds where this script is and if configured by the config execuable file, DO NOT CHANGE IT
 
@@ -32,9 +32,17 @@ if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
-        
-        # please keep the space directly above this comment there at all times, it will mess things up if you do not have a space there
-        # ADD YOUR CASES BELOW THIS COMMENT
+		test)
+			# setting the string that needs to be changed
+			to_find=hello
+
+			# project directory
+			working_dir=~/$2
+
+			# setting where the template is
+			template_dir=~
+			;;
+
         c++)
             # setting the string that needs to be changed
             to_find=template_cpp

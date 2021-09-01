@@ -36,10 +36,16 @@ int main(int argc, char* argv[]) {
             std::cout << "What is the path for the template directory (include the template directory name in the path): "<< std::endl;
             std::cin >> template_path;
             std::cout << std::endl;
+
+            // if the user added a / at the end then it is removed for good measure
+            if (template_path.back() == '/') template_path.pop_back();
             
             std::cout << "What is the path for the directory where the project directory will be made(where do you want the project directory to end up): "<< std::endl;
             std::cin >> working_path;
             std::cout << std::endl;
+
+            // if the user added a / at the end then it is removed for good measure
+            if (working_path.back() == '/') working_path.pop_back();            
             
             std::cout << "What is the string that must be replaced in the project directory (the flag to replace): "<< std::endl;
             std::cin >> to_find;
@@ -47,7 +53,6 @@ int main(int argc, char* argv[]) {
             
             std::cout << "What do you want to call this new type: "<< std::endl;
             std::cin >> type;
-            std::cout << std::endl;
 
             // debugging purposes
             /*
@@ -60,8 +65,7 @@ int main(int argc, char* argv[]) {
             
             // initializing a vector that holds how the new lines for the file in the correct formatting with the inputs
             // from the user filling in the needed information
-            std::vector<std::string> new_type = {"", 
-                                                "\t\t" + type + ")",
+            std::vector<std::string> new_type = {"\t\t" + type + ")",
                                                 "\t\t\t# setting the string that needs to be changed",
                                                 "\t\t\tto_find=" + to_find,
                                                 "",
@@ -76,22 +80,37 @@ int main(int argc, char* argv[]) {
             // gets the lines from the file that needs the lines declared above added to it
             copy_lines_of_file_to_vector(contents, "templatize.sh");
 
-            // what line the file the new lines must be placed
-            int place = 35;
+            // finding where the new lines from the vector above must be placed by looking for the beginning of the case structure
+            int place = 0;
+            for (std::string line : contents){
+                // counting the lines
+                place++;
+
+                // looking for "case" in the line, if it finds it, it exits the loop
+                if (first(line, "case") != -1) break;
+            }
 
             // assigning the lines of the vector above to the corresponding lines in the file
-            for (int i = place - 1; i < place + new_type.size(); i++){
-                contents[i] = new_type[i - place];
+            for (int i = new_type.size() - 1; i >= 0; i--){
+                contents.insert(contents.begin() + place, new_type[i]);
             }
 
             // writing the adjusted lines back to file
             write_lines_of_vector_to_file(contents, "templatize.sh");
             
-           return 0;
+            return 0;
+        }
+        else{
+            // if the past in argument did not match the accepted one or if too many arguments were pasted in
+            print("Error: Invalid input");
+
         }
     }
-    // if the past in argument did not match the accepted one or if too many arguments were pasted in
-    print("Error: Invalid inupts");
+    else {
+        // if too many arguments were pasted in
+        print("Error: Too many inputs");
+
+    }
 
     return 0;
 }
