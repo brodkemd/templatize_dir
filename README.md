@@ -38,7 +38,7 @@ This shell script provides the functionality to create new directory by using an
 
 # C: How to use this command:
    
-   Method 1:
+   **Method 1:**
       
       Format:template TYPE NAME
 
@@ -51,7 +51,7 @@ This shell script provides the functionality to create new directory by using an
          
       
 
-   Method 2:
+   **Method 2:**
       
       Format:template TEMPLATE_DIRECTORY PROJECT_DIRECTORY FLAG NAME
 
