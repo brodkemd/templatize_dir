@@ -8,19 +8,19 @@ This shell script provides the functionality to create new directory by using an
 
    2) Must install the following package:
       
-      sudo apt install rename
+      `sudo apt install rename`
 
    3) Clone this repository:
    
-      git clone "https://github.com/brodkemd/templatize_dir"
+      `git clone "https://github.com/brodkemd/templatize_dir"`
       
    4) Go into that directory:
       
-      cd templatize_dir
+      `cd templatize_dir`
 
    4) Run the config file to add the command to the bash alias config file (.bash_aliases) and adds the install location to the shell script
       
-      ./config install
+      `./config install`
       
    5) This command does not come with any types (also called templates) out of the box, go to section B to see how to add one of your very own.
 
@@ -31,7 +31,7 @@ This shell script provides the functionality to create new directory by using an
    
    2) Run the config exe as show below. It will prompt you with all the necessary things to setup a new template type (also called template). 
       
-      ./config add
+      `./config add`
    
    3) Now you have a new template that you can easily call just like with any other type above
 
