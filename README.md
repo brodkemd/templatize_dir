@@ -4,7 +4,7 @@ This shell script provides the functionality to create new directory by using an
    
    1) Update that apt repository:
    
-      sudo apt update && sudo apt upgrade
+      `sudo apt update && sudo apt upgrade`
 
    2) Must install the following package:
       
