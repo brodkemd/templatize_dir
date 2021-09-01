@@ -42,10 +42,10 @@ This shell script provides the functionality to create new directory by using an
       
       Format:template TYPE NAME
 
-      TYPE: any type that you have made so far, to see what types (also called templates) you currently have. Go to line 34 in templatize.sh, this line begins a 
-         case structure, this is indicated by "case". Any word the is followd by a ")" is a type (also called template) that you created and can use. Everything 
-         from that word to ";;" are the properties of that template, you can edit these if you want but that might have negative side effects if you set 
-         something wrong.
+      TYPE: any type that you have made so far, to see what types (also called templates) you currently have. Go to line 34 in templatize.sh, 
+         this line begins a case structure, this is indicated by "case". Any word the is followd by a ")" is a type (also called template) 
+         that you created and can use. Everything from that word to ";;" are the properties of that template, you can edit these if you want 
+         but that might have negative side effects if you set something wrong.
 
       NAME: whatever you want to call the new project
          
