@@ -39,6 +39,11 @@ This is open source, do whatever you want with any of the code in this repositor
 
 # C: How to use this command:
    
+   **Note**
+      You can see the following information by typing template only. Namely:
+      
+         `template`
+   
    **Method 1:**
       
       Format:template TYPE NAME
