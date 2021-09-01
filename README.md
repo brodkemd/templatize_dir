@@ -42,7 +42,7 @@ This is open source, do whatever you want with any of the code in this repositor
    **Note**
       You can see the following information by typing template only. Namely:
       
-         `template`
+      `template`
    
    **Method 1:**
       
