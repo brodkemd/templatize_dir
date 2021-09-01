@@ -32,17 +32,6 @@ if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
-		test)
-			# setting the string that needs to be changed
-			to_find=hello
-
-			# project directory
-			working_dir=~/$2
-
-			# setting where the template is
-			template_dir=~
-			;;
-
         c++)
             # setting the string that needs to be changed
             to_find=template_cpp
