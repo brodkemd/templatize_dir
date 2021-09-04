@@ -19,11 +19,23 @@ This is open source, do whatever you want with any of the code in this repositor
       
       `cd templatize_dir`
 
-   4) Run the config file to add the command to the bash alias config file (.bash_aliases) and adds the install location to the shell script
+   5) if you have a regualr computer:
+         
+         Run the config file to add the command to the bash alias config file (.bash_aliases) and adds the install location to the shell script
       
-      `./config install`
+         `./config install`
+     
+      if you have an ARM based computer
+         
+         Run the following command that rebuilds the executable for that architecture
+         
+         `cd lib; make; cd ..; make`
+         
+         Now you can run the install command
+            
+         `./config install`
       
-   5) This command does not come with any types (also called templates) out of the box, go to section B to see how to add one of your very own.
+   6) This command comes with two types (also called templates) out of the box, go to section B to see how to add one of your very own.
 
 
 # B: To set a new directory as a template:
