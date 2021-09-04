@@ -6,24 +6,24 @@ install_dir=/home/marek/Documents/Shell/templatize_dir
 function invalid_inputs () {
         echo "format:template TYPE NAME"
         echo ""
-        echo "CURRENT TYPE OPTIONS ARE:"
-        echo "C++"
-        echo "qiskit"
+        echo "- CURRENT TYPE OPTIONS ARE:"
+        echo "- C++"
+        echo "- qiskit"
         echo ""
-        echo "NAME: whatever you want to call the new project"
+        echo "- NAME: whatever you want to call the new project"
         echo ""
         echo "Alternate format: template TEMPLATE_DIRECTORY PROJECT_DIRECTORY FLAG NAME"
         echo ""
-        echo "TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want to use as a template for the project." 
-        echo "NOTE: do not add a / at the end of the path please otherwise it will not work as intended"
+        echo "- TEMPLATE_DIRECTORY: this option is where you specify the path to the directory that you want to use as a template for the project." 
+        echo "- NOTE: do not add a / at the end of the path please otherwise it will not work as intended"
         echo ""
-        echo "PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided where the directories do not exist they will be made no matter their position on the hierachy."
-        echo "NOTE: a drectory will be made in this directory with the name of the project."
-        echo "NOTE: do not add a / at the end of the path it will mess things up."
+        echo "- PROJECT_DIRECTORY: this option is where you specify the directory where you want the project directory to be placed, if a path is provided where the directories do not exist they will be made no matter their position on the hierachy."
+        echo "- NOTE: a drectory will be made in this directory with the name of the project."
+        echo "- NOTE: do not add a / at the end of the path it will mess things up."
         echo ""
-        echo "FLAG: this option is the string that you want to replace in project, including in directory names, file names, and file contents"
+        echo "- FLAG: this option is the string that you want to replace in project, including in directory names, file names, and file contents"
         echo ""
-        echo "NAME: this option is the string that represents what you want to call the project it will replace flag in the project directory, including in directory names, file names, and file contents" 
+        echo "- NAME: this option is the string that represents what you want to call the project it will replace flag in the project directory, including in directory names, file names, and file contents" 
         # exits the script
         exit 0
 }
@@ -32,6 +32,17 @@ if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
+		cpp_lib)
+			# setting the string that needs to be changed
+			to_find=template_cpp
+
+			# project directory
+			working_dir=~/Documents/C++/$2
+
+			# setting where the template is
+			template_dir=~/Documents/Shell/templatize_dir/template_cpp_lib
+			;;
+
         c++)
             # setting the string that needs to be changed
             to_find=template_cpp
@@ -93,14 +104,14 @@ com
 replacement=${replacement,,}
 
 # informing the user
-echo "Making:" $replacement "directory in: " $working_dir
+echo "- Making:" $replacement "directory in: " $working_dir
 
 
 # making the project directory, -p will make everything in path if need be 
 mkdir -p $working_dir
 
 # informing the user
-echo "Copying contents of" $template_dir "to" $working_dir
+echo "- Copying contents of" $template_dir "to" $working_dir
 
 #copying the template there
 cp -r $template_dir/* $working_dir
@@ -138,7 +149,7 @@ temp_var="hello"
 cd $working_dir
 
 # informing the user
-echo "Changing the flag to name in all of the files' contents"
+echo "- Changing the flag to name in all of the files' contents"
 
 # changing all occurences of the string in every file in the directory, there are there to account for case
 # changing it to the name that was passed in
@@ -146,7 +157,7 @@ find ./ -type f | xargs sed -i  's/'"$to_find"'/'"$replacement"'/g'
 find ./ -type f | xargs sed -i  's/'"${to_find^}"'/'"${replacement^}"'/g'
 find ./ -type f | xargs sed -i  's/'"${to_find^^}"'/'"${replacement^^}"'/g'
 
-echo "NOTE: if you get this error \"ls: cannot access '*/': No such file or directory\" just ignore it"
+echo "- NOTE: if you get this error \"ls: cannot access '*/': No such file or directory\" just ignore it"
 # counts how many iterations the loop lower in this file will go through
 # used for comparison
 function max_iterations () {
@@ -375,7 +386,7 @@ function move_dirs () {
     #fi
 }
 
-echo "Replacing flag in all file and directory names"
+echo "- Replacing flag in all file and directory names"
 
 # calling the main funtion 
 move_dirs

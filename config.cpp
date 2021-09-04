@@ -21,13 +21,13 @@ int main(int argc, char* argv[]) {
             contents[0] = "install_dir=" + output;
             
             // informing the user
-            print("Configuring the script");
+            print("- Configuring the script");
             
             // writing the lines back to the main shell file
             write_lines_of_vector_to_file(contents, "templatize.sh");
             
             // informing the user
-            print("Adding alias to .bash_aliases");
+            print("- Adding alias to .bash_aliases");
             
             // running a command that adds makes the .bash_aliases file and adds the required command to utilize the functionaliy
             // of the main shell script
@@ -106,13 +106,13 @@ int main(int argc, char* argv[]) {
             }
 
             // informing the user
-            print("\nAdding your type to the file");
+            print("\n- Adding your type to the file");
             
             // writing the adjusted lines back to file
             write_lines_of_vector_to_file(contents, "templatize.sh");
             
             // informing the user
-            print("\ndone");
+            print("\nDone");
             
             return 0;
             
