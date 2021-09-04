@@ -19,13 +19,13 @@ This is open source, do whatever you want with any of the code in this repositor
       
       `cd templatize_dir`
 
-   5) if you have a regualr computer:
+   5) **If you have a regualr computer:**
          
          Run the config file to add the command to the bash alias config file (.bash_aliases) and adds the install location to the shell script
       
          `./config install`
      
-      if you have an ARM based computer
+      **if you have an ARM based computer:**
          
          Run the following command that rebuilds the executable for that architecture
          
