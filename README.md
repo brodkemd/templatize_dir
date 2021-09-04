@@ -19,7 +19,7 @@ This is open source, do whatever you want with any of the code in this repositor
       
       `cd templatize_dir`
 
-   5) **If you have a regualr computer:**
+   5) **If you have a regular computer:**
          
          Run the config file to add the command to the bash alias config file (.bash_aliases) and adds the install location to the shell script
       
