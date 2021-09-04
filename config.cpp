@@ -19,16 +19,26 @@ int main(int argc, char* argv[]) {
 
             // setting the first line of file to the to a variable that holds where the script is located
             contents[0] = "install_dir=" + output;
-
+            
+            // informing the user
+            print("Configuring the script");
+            
             // writing the lines back to the main shell file
             write_lines_of_vector_to_file(contents, "templatize.sh");
-
+            
+            // informing the user
+            print("Adding alias to .bash_aliases");
+            
             // running a command that adds makes the .bash_aliases file and adds the required command to utilize the functionaliy
             // of the main shell script
             run_command("touch ~/.bash_aliases; echo \"alias template=\'bash " + output + "/templatize.sh\'\" >> ~/.bash_aliases");
-
+            
+            // informing the user
+            print("\nDone");
+            
             // exiting
             return 0;
+            
         }
         else if((std::string)argv[1] == "add"){
             // pulling the necessary information from the user
@@ -95,10 +105,17 @@ int main(int argc, char* argv[]) {
                 contents.insert(contents.begin() + place, new_type[i]);
             }
 
+            // informing the user
+            print("\nAdding your type to the file");
+            
             // writing the adjusted lines back to file
             write_lines_of_vector_to_file(contents, "templatize.sh");
             
+            // informing the user
+            print("\ndone");
+            
             return 0;
+            
         }
         else{
             // if the past in argument did not match the accepted one or if too many arguments were pasted in
