@@ -25,7 +25,11 @@ This is open source, do whatever you want with any of the code in this repositor
       
          `./config install`
      
-      **if you have an ARM based computer:**
+      **If you have an ARM based computer:**
+         
+         Install necessary package
+         
+         `sudo apt install build-essential`
          
          Run the following command that rebuilds the executable for that architecture
          
@@ -89,3 +93,19 @@ This is open source, do whatever you want with any of the code in this repositor
 
       NAME: this option is the string that represents what you want to call the project it will replace FLAG 
             in the project directory, including in directory names, file names, and file contents 
+
+# D: Example Usage:
+
+   Here I am making a new c++ project based on a project type that I have already added and I am naming the project "Hello_world".
+   
+   `template c++ Hello_world`
+   
+   Here I am making a new c++ project based off manual entries of a template and destination directory
+   
+   `template ~/Documents/Shell/templatize_dir/template_cpp ~/Documents/C++ template_cpp Hello_world`
+   
+    - Here I am using "~/Documents/Shell/templatize_dir/template_cpp" as the template so all of it contents will appear in the new 
+      project directory. "~/Documents/C++" is where the project directory will end up, "template_cpp" is the string that will be replaced
+      everywhere in the project directory, and "Hello_world" will replace "template_cpp".
+    - In summary, after running the above command I will have this directory "~/Documents/C++/Hello_world that contains" the contents of 
+      "~/Documents/Shell/templatize_dir/template_cpp" but anywhere(literally anywhere) there was "template_cpp" there is now "Hello_world"
