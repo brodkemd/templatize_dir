@@ -1,4 +1,4 @@
-install_dir=/home/marek/Documents/Shell/templatize_dir
+install_dir=/home/marek/templatize_dir
 
 # install_dir holds where this script is and if configured by the config execuable file, DO NOT CHANGE IT
 
@@ -7,7 +7,8 @@ function invalid_inputs () {
         echo "format:template TYPE NAME"
         echo ""
         echo "- CURRENT TYPE OPTIONS ARE:"
-        echo "- C++"
+        echo "- c++"
+	    echo "- c++_lib"
         echo "- qiskit"
         echo ""
         echo "- NAME: whatever you want to call the new project"
@@ -28,27 +29,73 @@ function invalid_inputs () {
         exit 0
 }
 
+function replace_dots() {
+    cd $dir
+    dir=`pwd`
+<<com
+    cur_dir=`pwd`
+    string_dir=""
+    temp_string_dir=""
+    out_dir=""
+    bool_back="false"
+    num=0
+
+    for char in $dir
+    do
+        if [ $char = / ]
+        then
+            continue
+        else
+            string_dir+=$char
+            if [ $string_dir = .. ]
+            then
+                cd ..
+                echo `pwd`
+                bool_back="true"
+                string_dir=""
+                let num+=3
+                
+            elif [ $string_dir = . ]
+            then
+                dir=`pwd`${dir:1:${#dir}}
+                break
+
+            else
+                break
+
+            fi
+        fi
+    done
+
+    if [ bool_back = "true" ]
+    then
+        dir=`pwd`${dir:num:${#dir}}
+    
+    fi
+com
+}
+
 if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
-		cpp_lib)
-			# setting the string that needs to be changed
-			to_find=template_cpp
+	c++_lib)
+		# setting the string that needs to be changed
+		to_find=template_cpp
 
-			# project directory
-			working_dir=~/Documents/C++/$2
+		# project directory
+		working_dir=/mnt/c/users/mdbrodke/Documents/C++/$2
 
-			# setting where the template is
-			template_dir=~/Documents/Shell/templatize_dir/template_cpp_lib
-			;;
+		# setting where the template is
+		template_dir=$install_dir/template_cpp_lib
+		;;
 
         c++)
             # setting the string that needs to be changed
             to_find=template_cpp
 
             # project directory
-            working_dir=~/Documents/C++/$2
+            working_dir=/mnt/c/users/mdbrodke/Documents/C++/$2
 
             # setting where the template is
             template_dir=$install_dir/template_cpp
@@ -76,9 +123,20 @@ then
 elif [ $# -eq 4 ]
 then
     # assigning the passed in arguments to the variables in a specified order
-    template_dir=$1
+    dir=$1
+    replace_dots
+    template_dir=$dir
+    #echo $template_dir
+
+    dir=$2
+    replace_dots
+    working_dir=$dir/$4
+    #echo $working_dir
+
+    #template_dir=$1
     # because a directory will be made with the name of the project in the inputted project directory
-    working_dir=$2/$4
+    #working_dir=$2/$4
+
     to_find=$3
     replacement=$4
 
