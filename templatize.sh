@@ -7,9 +7,6 @@ function invalid_inputs () {
         echo "format:template TYPE NAME"
         echo ""
         echo "- CURRENT TYPE OPTIONS ARE:"
-        echo "- c++"
-	    echo "- c++_lib"
-        echo "- qiskit"
         echo ""
         echo "- NAME: whatever you want to call the new project"
         echo ""
@@ -32,85 +29,12 @@ function invalid_inputs () {
 function replace_dots() {
     cd $dir
     dir=`pwd`
-<<com
-    cur_dir=`pwd`
-    string_dir=""
-    temp_string_dir=""
-    out_dir=""
-    bool_back="false"
-    num=0
-
-    for char in $dir
-    do
-        if [ $char = / ]
-        then
-            continue
-        else
-            string_dir+=$char
-            if [ $string_dir = .. ]
-            then
-                cd ..
-                echo `pwd`
-                bool_back="true"
-                string_dir=""
-                let num+=3
-                
-            elif [ $string_dir = . ]
-            then
-                dir=`pwd`${dir:1:${#dir}}
-                break
-
-            else
-                break
-
-            fi
-        fi
-    done
-
-    if [ bool_back = "true" ]
-    then
-        dir=`pwd`${dir:num:${#dir}}
-    
-    fi
-com
 }
 
 if [ $# -eq 2 ]
 then
     # determines what type of project the user wants and makes it
     case $1 in
-	c++_lib)
-		# setting the string that needs to be changed
-		to_find=template_cpp
-
-		# project directory
-		working_dir=/mnt/c/users/mdbrodke/Documents/C++/$2
-
-		# setting where the template is
-		template_dir=$install_dir/template_cpp_lib
-		;;
-
-        c++)
-            # setting the string that needs to be changed
-            to_find=template_cpp
-
-            # project directory
-            working_dir=/mnt/c/users/mdbrodke/Documents/C++/$2
-
-            # setting where the template is
-            template_dir=$install_dir/template_cpp
-            ;;
-        
-        qiskit)
-            # setting the string that needs to be changed
-            to_find=template_Q
-
-            # project directory
-            working_dir=~/Documents/Qcode/$2
-
-            # setting where the template is
-            template_dir=$install_dir/template_Q
-            ;;
 
         *)
             # if they enter something that is wrong let them know
